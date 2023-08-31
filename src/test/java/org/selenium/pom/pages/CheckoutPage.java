@@ -32,6 +32,7 @@ public class CheckoutPage extends BasePage {
     private final By passwordFromCheckout = By.id("password");
     private final By loginBtnFromCheckout = By.name("login");
     private final By overlays = By.cssSelector(".blockUI.blockOverlay");
+    private final By directBankTransferRadioBtn = By.id("payment_method_bacs");
 
 
     public CheckoutPage(WebDriver driver) {
@@ -217,6 +218,14 @@ public class CheckoutPage extends BasePage {
         enterPostalCode(billingAddress.getZipCode());
         enterBillingPhoneNo(billingAddress.getPhone_no());
         enterBillingEmailId(billingAddress.getEmail_id());
+        return this;
+    }
+
+    public CheckoutPage selectDirectBankTransfer(){
+        WebElement e = wait.until(ExpectedConditions.elementToBeClickable(directBankTransferRadioBtn));
+        if(!e.isSelected()){
+            e.click();
+        }
         return this;
     }
 

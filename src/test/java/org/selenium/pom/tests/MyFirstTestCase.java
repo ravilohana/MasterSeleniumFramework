@@ -83,6 +83,7 @@ public class MyFirstTestCase extends BaseTest {
         Assert.assertEquals(cartPage.getProductName(), products.getName());
         CheckoutPage checkoutPage = cartPage.clickCheckoutBtn()
                 .setBillingAddressFields(billingAddress)
+                .selectDirectBankTransfer()
                 .clickPlaceOrderBtn();
 
 
@@ -124,6 +125,7 @@ public class MyFirstTestCase extends BaseTest {
                 .loginFromCheckoutPage(loginCredentials)
                 .setBillingAddressFields(billingAddress)
                 .setBillingEmailIDOnLogin(loginCredentials)
+                .selectDirectBankTransfer()
                 .clickPlaceOrderBtn();
 
 

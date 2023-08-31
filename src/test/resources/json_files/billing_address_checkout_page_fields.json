@@ -5,9 +5,9 @@
   "countryName" : "India",
   "streetAddressOne" : "Laxmi Nagar",
   "streetAddressTwo" : "Street View 1",
-  "city" : "New Delhi",
-  "state" : "Delhi",
-  "zipCode" : "110111",
+  "city" : "Bangalore",
+  "state" : "Karnataka",
+  "zipCode" : "560033",
   "phone_no" : "987456210",
   "email_id": "at@gmail.com"
 }
