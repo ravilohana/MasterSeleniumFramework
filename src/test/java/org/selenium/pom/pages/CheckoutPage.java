@@ -1,8 +1,11 @@
 package org.selenium.pom.pages;
 
+import objects.BillingAddress;
+import objects.LoginCredentials;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.selenium.pom.base.BasePage;
 
@@ -28,6 +31,7 @@ public class CheckoutPage extends BasePage {
     private final By usernameFromCheckout = By.id("username");
     private final By passwordFromCheckout = By.id("password");
     private final By loginBtnFromCheckout = By.name("login");
+    private final By overlays = By.cssSelector(".blockUI.blockOverlay");
 
 
     public CheckoutPage(WebDriver driver) {
@@ -42,7 +46,7 @@ public class CheckoutPage extends BasePage {
     }
 
 
-
+/*
     public CheckoutPage billingDetailsForm(String fName,
                                            String lName,
                                            String compName,
@@ -84,23 +88,153 @@ public class CheckoutPage extends BasePage {
         driver.findElement(billing_email).sendKeys(email_id);
         return this;
     }
+*/
+
+    public CheckoutPage enterFirstName(String fName){
+        WebElement eleFirstName = wait.until(ExpectedConditions.visibilityOfElementLocated(firstName));
+        eleFirstName.clear();
+        eleFirstName.sendKeys(fName);
+        return this;
+    }
+
+    public CheckoutPage enterLastName(String lName){
+        WebElement eleLastName = wait.until(ExpectedConditions.visibilityOfElementLocated(lastName));
+        eleLastName.clear();
+        eleLastName.sendKeys(lName);
+        return this;
+    }
+
+
+    public CheckoutPage enterBillingCompany(String billing_Comp){
+        WebElement eleBillingComp = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_company));
+        eleBillingComp.clear();
+        eleBillingComp.sendKeys(billing_Comp);
+        return this;
+    }
+
+    public CheckoutPage enterBillingCountry(String bill_country){
+        selectOptions(driver.findElement(By.id("billing_country")),bill_country);
+        return this;
+    }
+
+    public CheckoutPage enterBillingAddressOne(String bill_address_one){
+        WebElement eleBillAddressOne = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_address_1));
+        eleBillAddressOne.clear();
+        eleBillAddressOne.sendKeys(bill_address_one);
+        return this;
+    }
+
+    public CheckoutPage enterBillingAddressTwo(String bill_address_two){
+        WebElement eleBillAddressTwo = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_address_2));
+        eleBillAddressTwo.clear();
+        eleBillAddressTwo.sendKeys(bill_address_two);
+        return this;
+    }
+
+
+    public CheckoutPage enterBillingCity(String bill_city){
+        WebElement eleBillingCity = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_city));
+        eleBillingCity.clear();
+        eleBillingCity.sendKeys(bill_city);
+        return this;
+    }
+
+    public CheckoutPage enterBillingState(String bill_state){
+        selectOptions(driver.findElement(By.id("billing_state")),bill_state);
+        return this;
+    }
+
+    public CheckoutPage enterPostalCode(String postal_code){
+        WebElement eleBillingPostcode = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_postcode));
+        eleBillingPostcode.clear();
+        eleBillingPostcode.sendKeys(postal_code);
+        return this;
+    }
+
+
+    public CheckoutPage enterBillingPhoneNo(String bill_ph_no){
+        WebElement eleBillingPhoneNo = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_phone));
+        eleBillingPhoneNo.clear();
+        eleBillingPhoneNo.sendKeys(bill_ph_no);
+        return this;
+    }
+
+    public CheckoutPage enterBillingEmailId(String bill_email_id){
+        WebElement eleBillingEmailId = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_email));
+        eleBillingEmailId.clear();
+        eleBillingEmailId.sendKeys(bill_email_id);
+        return this;
+    }
+
+    public CheckoutPage clickLoginLinkFromCheckout(){
+       wait.until(ExpectedConditions.elementToBeClickable(loginLinkFromCheckout)).click();
+       return this;
+    }
+
+
+    public CheckoutPage enterUsername(String username){
+        WebElement eleUsername = wait.until(ExpectedConditions.visibilityOfElementLocated(usernameFromCheckout));
+        eleUsername.clear();
+        eleUsername.sendKeys(username);
+        return this;
+    }
+
+
+    public CheckoutPage enterPassword(String password){
+        WebElement elePassword= wait.until(ExpectedConditions.visibilityOfElementLocated(passwordFromCheckout));
+        elePassword.clear();
+        elePassword.sendKeys(password);
+        return this;
+    }
+
+    public CheckoutPage clickLoginBtnFromCheckout(){
+        wait.until(ExpectedConditions.elementToBeClickable(loginBtnFromCheckout)).click();
+        return this;
+    }
+
+    public CheckoutPage setBillingEmailIDOnLogin(LoginCredentials loginCredentials){
+        enterBillingEmailId(loginCredentials.getEmail_id());
+        return this;
+    }
+
+
+
+
+    public CheckoutPage setBillingAddressFields(BillingAddress billingAddress) throws InterruptedException {
+
+        enterFirstName(billingAddress.getFirstname());
+        enterLastName(billingAddress.getLastname());
+        enterBillingCompany(billingAddress.getCompanyName());
+
+//          driver.findElement(billing_country).sendKeys(countryName);
+        enterBillingCountry(billingAddress.getCountryName());
+//        Thread.sleep(3000);
+        enterBillingAddressOne(billingAddress.getStreetAddressOne());
+        enterBillingAddressTwo(billingAddress.getStreetAddressTwo());
+        enterBillingCity(billingAddress.getCity());
+        enterBillingState(billingAddress.getState());
+//        Thread.sleep(3000);
+        enterPostalCode(billingAddress.getZipCode());
+        enterBillingPhoneNo(billingAddress.getPhone_no());
+        enterBillingEmailId(billingAddress.getEmail_id());
+        return this;
+    }
 
     public CheckoutPage clickPlaceOrderBtn(){
+        waitForOverlaysToDisappear(overlays);
         driver.findElement(placeOrderBtn).click();
         return this;
     }
 
     public String getNotice(){
-        return  driver.findElement(successNotice).getText();
+        return  wait.until(ExpectedConditions.visibilityOfElementLocated(successNotice)).getText();
     }
 
-    public CheckoutPage loginFromCheckoutPage() throws InterruptedException {
-        driver.findElement(loginLinkFromCheckout).click();
-        Thread.sleep(3000);
-        driver.findElement(usernameFromCheckout).sendKeys("seleniumFramework");
-        driver.findElement(passwordFromCheckout).sendKeys("$Framework$@2023");
-        driver.findElement(loginBtnFromCheckout).click();
-        Thread.sleep(2000);
+    public CheckoutPage loginFromCheckoutPage(LoginCredentials loginCredentials) throws InterruptedException {
+        clickLoginLinkFromCheckout();
+        enterUsername(loginCredentials.getUsername());
+        enterPassword(loginCredentials.getPassword());
+        clickLoginBtnFromCheckout();
         return this;
     }
 

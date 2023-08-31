@@ -12,6 +12,8 @@ target/
 *.iws
 *.iml
 *.ipr
+src/test/java/LambdaDragDrop.java
+
 
 ### Eclipse ###
 .apt_generated

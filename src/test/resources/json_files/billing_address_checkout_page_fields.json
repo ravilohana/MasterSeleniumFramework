@@ -1,0 +1,15 @@
+{
+  "firstname": "Ankit",
+  "lastname" : "Tewari",
+  "companyName" : "AT Company",
+  "countryName" : "India",
+  "streetAddressOne" : "Laxmi Nagar",
+  "streetAddressTwo" : "Street View 1",
+  "city" : "New Delhi",
+  "state" : "Delhi",
+  "zipCode" : "110111",
+  "phone_no" : "987456210",
+  "email_id": "at@gmail.com"
+}
+
+
