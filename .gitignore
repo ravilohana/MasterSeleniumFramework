@@ -13,6 +13,10 @@ target/
 *.iml
 *.ipr
 src/test/java/LambdaDragDrop.java
+testng_all_browser.xml
+testng_chrome.xml
+testng_firefox.xml
+testng_msEdge.xml
 
 
 ### Eclipse ###

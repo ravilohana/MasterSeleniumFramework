@@ -65,7 +65,7 @@ public class MyFirstTestCase extends BaseTest {
 
         Products products = new Products(1215);
 
-        StorePage storePage = new HomePage(driver)
+        StorePage storePage = new HomePage(getDriver())
                 .load().clickStoreMenuLink()
                 .search("Blue");
 
@@ -97,9 +97,9 @@ public class MyFirstTestCase extends BaseTest {
         BillingAddress billingAddress = JacksonUtils.deserializeJson("./json_files/billing_address_checkout_page_fields.json"
                 ,BillingAddress.class);
 
-        LoginCredentials loginCredentials = JacksonUtils.deserializeJson("./json_files/login_credentials.json"
-                ,LoginCredentials.class);
-        StorePage storePage = new HomePage(driver)
+//        LoginCredentials loginCredentials = JacksonUtils.deserializeJson("./json_files/login_credentials.json"
+//                ,LoginCredentials.class);
+        StorePage storePage = new HomePage(getDriver())
                 .load().clickStoreMenuLink()
                 .search("Blue");
 
@@ -122,9 +122,9 @@ public class MyFirstTestCase extends BaseTest {
 
 
         CheckoutPage checkoutPage = cartPage.clickCheckoutBtn()
-                .loginFromCheckoutPage(loginCredentials)
+                .loginFromCheckoutPage()
                 .setBillingAddressFields(billingAddress)
-                .setBillingEmailIDOnLogin(loginCredentials)
+                .setBillingEmailIDOnLogin()
                 .selectDirectBankTransfer()
                 .clickPlaceOrderBtn();
 

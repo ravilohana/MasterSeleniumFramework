@@ -3,11 +3,13 @@ package org.selenium.pom.pages;
 import objects.BillingAddress;
 import objects.LoginCredentials;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.selenium.pom.base.BasePage;
+import utils.ConfigLoaders;
 
 
 public class CheckoutPage extends BasePage {
@@ -33,6 +35,8 @@ public class CheckoutPage extends BasePage {
     private final By loginBtnFromCheckout = By.name("login");
     private final By overlays = By.cssSelector(".blockUI.blockOverlay");
     private final By directBankTransferRadioBtn = By.id("payment_method_bacs");
+    private final By alternateCountryDropDown = By.id("select2-billing_country-container");
+    private final By alternateStateDropDown = By.id("select2-billing_state-container");
 
 
     public CheckoutPage(WebDriver driver) {
@@ -41,9 +45,26 @@ public class CheckoutPage extends BasePage {
 
 
 
-    public void selectOptions(WebElement element,  String txt){
-        Select select = new Select(element);
-        select.selectByVisibleText(txt);
+    public CheckoutPage selectCountry(String countryName) {
+/*        Select select = new Select(driver.findElement(countryDropDown));
+        select.selectByVisibleText(countryName);*/
+        wait.until(ExpectedConditions.elementToBeClickable(alternateCountryDropDown)).click();
+        WebElement e = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[text()='" + countryName + "']")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", e);
+        e.click();
+        return this;
+    }
+
+    public CheckoutPage selectState(String stateName){
+/*        Select select = new Select(driver.findElement(stateDropDown));
+        select.selectByVisibleText(stateName);*/
+        wait.until(ExpectedConditions.elementToBeClickable(alternateStateDropDown)).click();
+        WebElement e = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[text()='" + stateName + "']")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", e);
+        e.click();
+        return this;
     }
 
 
@@ -114,7 +135,7 @@ public class CheckoutPage extends BasePage {
     }
 
     public CheckoutPage enterBillingCountry(String bill_country){
-        selectOptions(driver.findElement(By.id("billing_country")),bill_country);
+        selectCountry(bill_country);
         return this;
     }
 
@@ -127,6 +148,7 @@ public class CheckoutPage extends BasePage {
 
     public CheckoutPage enterBillingAddressTwo(String bill_address_two){
         WebElement eleBillAddressTwo = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_address_2));
+        eleBillAddressTwo.click();
         eleBillAddressTwo.clear();
         eleBillAddressTwo.sendKeys(bill_address_two);
         return this;
@@ -135,13 +157,14 @@ public class CheckoutPage extends BasePage {
 
     public CheckoutPage enterBillingCity(String bill_city){
         WebElement eleBillingCity = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_city));
+        eleBillingCity.click();
         eleBillingCity.clear();
         eleBillingCity.sendKeys(bill_city);
         return this;
     }
 
     public CheckoutPage enterBillingState(String bill_state){
-        selectOptions(driver.findElement(By.id("billing_state")),bill_state);
+        selectState(bill_state);
         return this;
     }
 
@@ -198,11 +221,15 @@ public class CheckoutPage extends BasePage {
         return this;
     }
 
+    public CheckoutPage setBillingEmailIDOnLogin(){
+        enterBillingEmailId(ConfigLoaders.getInstance().getEmailId());
+        return this;
+    }
+
 
 
 
     public CheckoutPage setBillingAddressFields(BillingAddress billingAddress) throws InterruptedException {
-
         enterFirstName(billingAddress.getFirstname());
         enterLastName(billingAddress.getLastname());
         enterBillingCompany(billingAddress.getCompanyName());
@@ -241,8 +268,16 @@ public class CheckoutPage extends BasePage {
 
     public CheckoutPage loginFromCheckoutPage(LoginCredentials loginCredentials) throws InterruptedException {
         clickLoginLinkFromCheckout();
-        enterUsername(loginCredentials.getUsername());
-        enterPassword(loginCredentials.getPassword());
+        enterUsername(ConfigLoaders.getInstance().getUsername());
+        enterPassword(ConfigLoaders.getInstance().getPassword());
+        clickLoginBtnFromCheckout();
+        return this;
+    }
+
+    public CheckoutPage loginFromCheckoutPage() throws InterruptedException {
+        clickLoginLinkFromCheckout();
+        enterUsername(ConfigLoaders.getInstance().getUsername());
+        enterPassword(ConfigLoaders.getInstance().getPassword());
         clickLoginBtnFromCheckout();
         return this;
     }
