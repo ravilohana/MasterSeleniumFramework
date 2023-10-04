@@ -17,6 +17,11 @@ public class StorePage extends BasePage {
         super(driver);
     }
 
+    public StorePage load() {
+        load("/store");
+        return this;
+    }
+
     private StorePage enterTextSearchFld(String text){
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchFld)).sendKeys(text);
         return this;

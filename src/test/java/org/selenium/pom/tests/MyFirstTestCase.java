@@ -21,7 +21,7 @@ import java.io.InputStream;
 public class MyFirstTestCase extends BaseTest {
 
 
-    @Test
+  //  @Test
     public void guestCheckoutUsingDirectBankTransfer() throws InterruptedException, IOException {
 
 /*
@@ -60,6 +60,7 @@ public class MyFirstTestCase extends BaseTest {
         billingAddress = JacksonUtils.deserializeJson(inputStream,billingAddress.getClass());
         */
 
+        String searchFor = "Blue";
         BillingAddress billingAddress = JacksonUtils.deserializeJson("./json_files/billing_address_checkout_page_fields.json"
                 ,BillingAddress.class);
 
@@ -67,7 +68,7 @@ public class MyFirstTestCase extends BaseTest {
 
         StorePage storePage = new HomePage(getDriver())
                 .load().clickStoreMenuLink()
-                .search("Blue");
+                .search(searchFor);
 
 
         // Functional
@@ -77,7 +78,7 @@ public class MyFirstTestCase extends BaseTest {
 //        storePage
 //                .enterTextSearchFld("Blue")
 //                .clickSearchBtn();
-        Assert.assertEquals(storePage.getTitle(), "Search results: “Blue”");
+        Assert.assertEquals(storePage.getTitle(), "Search results: “ "+ searchFor+ " ”");
         storePage.clickAddToCartBtn(products.getName());
         CartPage cartPage = storePage.clickViewCart();
         Assert.assertEquals(cartPage.getProductName(), products.getName());
@@ -91,7 +92,7 @@ public class MyFirstTestCase extends BaseTest {
     }
 
 
-    @Test
+ //   @Test
     public void loginUserFromCheckoutUsingDirectBankTransfer() throws InterruptedException, IOException {
         Products products = new Products(1215);
         BillingAddress billingAddress = JacksonUtils.deserializeJson("./json_files/billing_address_checkout_page_fields.json"

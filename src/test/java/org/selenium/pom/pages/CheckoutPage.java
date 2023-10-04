@@ -38,12 +38,18 @@ public class CheckoutPage extends BasePage {
     private final By alternateCountryDropDown = By.id("select2-billing_country-container");
     private final By alternateStateDropDown = By.id("select2-billing_state-container");
 
+    private final By checkoutOrderReviewProductName = By.xpath("//td[@class='product-name']");
+
 
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
 
 
+    public CheckoutPage load() {
+        load("/checkout/");
+        return this;
+    }
 
     public CheckoutPage selectCountry(String countryName) {
 /*        Select select = new Select(driver.findElement(countryDropDown));
@@ -280,6 +286,10 @@ public class CheckoutPage extends BasePage {
         enterPassword(ConfigLoaders.getInstance().getPassword());
         clickLoginBtnFromCheckout();
         return this;
+    }
+
+    public String getTextCheckoutOrderReviewProductName(){
+        return  wait.until(ExpectedConditions.visibilityOfElementLocated(checkoutOrderReviewProductName)).getText();
     }
 
 

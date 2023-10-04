@@ -21,6 +21,12 @@ public class LoginCredentials {
         this.password = password;
     }
 
+    public LoginCredentials(String username, String password,String emailID) {
+        this.username = username;
+        this.password = password;
+        this.email_id = emailID;
+    }
+
     // getter and setter
 
 
