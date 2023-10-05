@@ -13,6 +13,7 @@ target/
 *.iml
 *.ipr
 src/test/java/LambdaDragDrop.java
+src/test/java/StorePageProducts.java
 testng_all_browser.xml
 testng_chrome.xml
 testng_firefox.xml

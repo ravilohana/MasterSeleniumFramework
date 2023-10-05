@@ -1,0 +1,18 @@
+[
+  {
+    "countryName": "India",
+    "stateName" : "Karnataka",
+    "zipCode" : "560034"
+  },
+  {
+    "countryName": "United States (US)",
+    "stateName" : "Florida",
+    "zipCode" : "32601"
+
+  },
+  {
+    "countryName" : "United Kingdom (UK)",
+    "stateName" : "England",
+    "zipCode" : "AL3 8QE"
+  }
+]

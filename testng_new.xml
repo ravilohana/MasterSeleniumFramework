@@ -7,7 +7,7 @@
 <!--            <class name="org.selenium.pom.tests.LoginTest">-->
             <class name="org.selenium.pom.tests.CheckoutTest">
                 <methods>
-                    <include name="LoginAndCheckoutUsingDirectBankTransfer"/>
+                    <include name="guestCheckoutUsingDirectBankTransferDiffCountries"/>
                 </methods>
             </class>
         </classes>

@@ -1,5 +1,6 @@
 package objects;
 
+import org.selenium.pom.base.BasePage;
 import utils.JacksonUtils;
 
 import java.io.IOException;
@@ -9,6 +10,8 @@ public class Products {
     // products POJO's
     private int id;
     private String name;
+
+    private boolean isFeatured;
 
 
 // Default Constructor
@@ -23,6 +26,12 @@ public class Products {
         this.name = name;
     }
 
+    public Products(int id, String name, boolean isFeatured) {
+        this.id = id;
+        this.name = name;
+        this.isFeatured = isFeatured;
+    }
+
     public Products(int id) throws IOException {
         String productsJsonFilePath = "./json_files/products.json";
         Products[] products = JacksonUtils.deserializeJson(productsJsonFilePath,Products[].class);
@@ -33,6 +42,18 @@ public class Products {
             }
         }
     }
+
+//    public Products(boolean isFeatured) throws IOException {
+//        String productsJsonFilePath = "./json_files/products.json";
+//        Products[] products = JacksonUtils.deserializeJson(productsJsonFilePath,Products[].class);
+//        for (Products product: products) {
+//            if(product.isFeatured()){
+//                this.id = product.getId();
+//                this.isFeatured = product.isFeatured;
+//                this.name = product.getName();
+//            }
+//        }
+//    }
 
     // Getter and Setter
 
@@ -54,8 +75,11 @@ public class Products {
         return this;
     }
 
+    public boolean isFeatured() {
+        return isFeatured;
+    }
 
-
-
-
+    public void setFeatured(boolean featured) {
+        isFeatured = featured;
+    }
 }

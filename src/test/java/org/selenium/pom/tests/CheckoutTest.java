@@ -1,10 +1,12 @@
 package org.selenium.pom.tests;
 
 import objects.BillingAddress;
+import objects.BillingCountries;
 import objects.LoginCredentials;
 import objects.Products;
 import org.checkerframework.checker.units.qual.C;
 import org.selenium.pom.base.BaseTest;
+import org.selenium.pom.dataProviders.AppDataProviders;
 import org.selenium.pom.pages.CheckoutPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -65,5 +67,27 @@ public class CheckoutTest extends BaseTest {
                 .clickPlaceOrderBtn();
     }
 
+    @Test(dataProvider = "getCountryNames", dataProviderClass = AppDataProviders.class)
+    public void guestCheckoutUsingDirectBankTransferDiffCountries(BillingCountries billingCountry) throws IOException, InterruptedException {
+        BillingAddress billingAddress = JacksonUtils.deserializeJson("./json_files/billing_address_checkout_page_fields.json"
+                ,BillingAddress.class);
+        CheckoutPage checkoutPage = new CheckoutPage(getDriver()).load();
+
+
+        CartAPI cartAPI = new CartAPI();
+        cartAPI.addToCartAPI(1215,1);
+        injectCookiesToBrowser(cartAPI.getCookies());
+
+        checkoutPage.load()
+                .enterBillingCountry(billingCountry.getCountryName())
+                .enterBillingState(billingCountry.getStateName())
+                .enterPostalCode(billingCountry.getZipCode())
+                .setBillingAddressFields(billingAddress)
+                .selectDirectBankTransfer()
+                .clickPlaceOrderBtn();
+
+
+        Assert.assertEquals(checkoutPage.getNotice(), "Thank you. Your order has been received.");
+    }
 
 }

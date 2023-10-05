@@ -1,9 +1,15 @@
 package org.selenium.pom.pages;
 
+import objects.Products;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.selenium.pom.base.BasePage;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StorePage extends BasePage {
 
@@ -11,6 +17,19 @@ public class StorePage extends BasePage {
     private final By searchBtn = By.cssSelector("button[value='Search']");
     private final By title = By.cssSelector("header > h1");
     private final By viewCartLink = By.cssSelector("a[title='View cart']");
+
+    private final By infoTxt = By.cssSelector(".woocommerce-info");
+
+//    private final  By storePageProductName = By.className(".astra-shop-summary-wrap > a > h2");
+
+//    private  List<WebElement> storePageProductNameList;
+
+
+//    private List<WebElement> getStorePageProductNameList(){
+//
+//        return driver.findElements(By.cssSelector(".astra-shop-summary-wrap > a > h2"));
+//
+//    }
 
 
     public StorePage(WebDriver driver) {
@@ -53,6 +72,29 @@ public class StorePage extends BasePage {
     public CartPage clickViewCart(){
         wait.until(ExpectedConditions.elementToBeClickable(viewCartLink)).click();
         return new CartPage(driver);
+    }
+    public ProductPage navigateToTheProduct(Integer id) throws IOException {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h2[normalize-space()='"+ new Products(id).getName() + "']"))).click();
+        return new ProductPage(driver);
+    }
+
+    public ProductPage searchExactMatch(String txt){
+        enterTextSearchFld(txt).clickSearchBtn();
+        return new ProductPage(driver);
+    }
+
+    public String getInfo(){
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(infoTxt)).getText();
+    }
+
+    public List<String> getStorePageProductNameList(){
+        List<String> productNameList = new ArrayList<>();
+        List<WebElement> storePageProductNameList = driver.findElements(By.cssSelector(".astra-shop-summary-wrap > a > h2"));
+        for (WebElement element: storePageProductNameList){
+//            System.out.println("Product Name text: ------>>>>>>>>>> " + element.getText());
+            productNameList.add(element.getText());
+        }
+        return productNameList;
     }
 
 }

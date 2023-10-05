@@ -12,7 +12,7 @@ import utils.CookieUtils;
 import java.util.List;
 
 public class BaseTest {
-    private ThreadLocal<WebDriver>  driver = new ThreadLocal<>();
+    private final ThreadLocal<WebDriver>  driver = new ThreadLocal<>();
 
     private void setDriver(WebDriver driver){
         this.driver.set(driver);
@@ -25,7 +25,8 @@ public class BaseTest {
     @Parameters("browser")
     @BeforeMethod
     public void startDriver(String browser){
-        browser = System.getProperty("browser",browser);
+ //       browser = System.getProperty("browser",browser);
+        if(browser == null) browser = "CHROME";
         setDriver(new DriverManager().initializeDriver(browser));
         System.out.println("CURRENT THREAD: " + Thread.currentThread().getId()
                 + "DRIVER: " + getDriver());

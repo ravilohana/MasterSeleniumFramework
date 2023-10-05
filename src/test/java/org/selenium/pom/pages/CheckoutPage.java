@@ -17,11 +17,11 @@ public class CheckoutPage extends BasePage {
     private final By firstName = By.id("billing_first_name");
     private final By lastName = By.id("billing_last_name");
     private final By billing_company = By.id("billing_company");
-//    private final By billing_country = By.id("billing_country");
+    //    private final By billing_country = By.id("billing_country");
     private final By billing_address_1 = By.id("billing_address_1");
     private final By billing_address_2 = By.id("billing_address_2");
     private final By billing_city = By.id("billing_city");
-//    private final By billing_state = By.id("billing_state");
+    //    private final By billing_state = By.id("billing_state");
     private final By billing_postcode = By.id("billing_postcode");
     private final By billing_phone = By.id("billing_phone");
     private final By billing_email = By.id("billing_email");
@@ -36,7 +36,11 @@ public class CheckoutPage extends BasePage {
     private final By overlays = By.cssSelector(".blockUI.blockOverlay");
     private final By directBankTransferRadioBtn = By.id("payment_method_bacs");
     private final By alternateCountryDropDown = By.id("select2-billing_country-container");
+
     private final By alternateStateDropDown = By.id("select2-billing_state-container");
+
+    private final By billingStateTextBox = By.id("billing_state");
+
 
     private final By checkoutOrderReviewProductName = By.xpath("//td[@class='product-name']");
 
@@ -54,6 +58,7 @@ public class CheckoutPage extends BasePage {
     public CheckoutPage selectCountry(String countryName) {
 /*        Select select = new Select(driver.findElement(countryDropDown));
         select.selectByVisibleText(countryName);*/
+
         wait.until(ExpectedConditions.elementToBeClickable(alternateCountryDropDown)).click();
         WebElement e = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//li[text()='" + countryName + "']")));
@@ -62,14 +67,17 @@ public class CheckoutPage extends BasePage {
         return this;
     }
 
-    public CheckoutPage selectState(String stateName){
-/*        Select select = new Select(driver.findElement(stateDropDown));
+    public CheckoutPage selectState(String stateName) {
+
+                /*        Select select = new Select(driver.findElement(stateDropDown));
         select.selectByVisibleText(stateName);*/
-        wait.until(ExpectedConditions.elementToBeClickable(alternateStateDropDown)).click();
-        WebElement e = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//li[text()='" + stateName + "']")));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", e);
-        e.click();
+            wait.until(ExpectedConditions.elementToBeClickable(alternateStateDropDown)).click();
+            WebElement e = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//li[text()='" + stateName + "']")));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", e);
+            e.click();
+
+
         return this;
     }
 
@@ -118,14 +126,14 @@ public class CheckoutPage extends BasePage {
     }
 */
 
-    public CheckoutPage enterFirstName(String fName){
+    public CheckoutPage enterFirstName(String fName) {
         WebElement eleFirstName = wait.until(ExpectedConditions.visibilityOfElementLocated(firstName));
         eleFirstName.clear();
         eleFirstName.sendKeys(fName);
         return this;
     }
 
-    public CheckoutPage enterLastName(String lName){
+    public CheckoutPage enterLastName(String lName) {
         WebElement eleLastName = wait.until(ExpectedConditions.visibilityOfElementLocated(lastName));
         eleLastName.clear();
         eleLastName.sendKeys(lName);
@@ -133,26 +141,26 @@ public class CheckoutPage extends BasePage {
     }
 
 
-    public CheckoutPage enterBillingCompany(String billing_Comp){
+    public CheckoutPage enterBillingCompany(String billing_Comp) {
         WebElement eleBillingComp = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_company));
         eleBillingComp.clear();
         eleBillingComp.sendKeys(billing_Comp);
         return this;
     }
 
-    public CheckoutPage enterBillingCountry(String bill_country){
+    public CheckoutPage enterBillingCountry(String bill_country) {
         selectCountry(bill_country);
         return this;
     }
 
-    public CheckoutPage enterBillingAddressOne(String bill_address_one){
+    public CheckoutPage enterBillingAddressOne(String bill_address_one) {
         WebElement eleBillAddressOne = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_address_1));
         eleBillAddressOne.clear();
         eleBillAddressOne.sendKeys(bill_address_one);
         return this;
     }
 
-    public CheckoutPage enterBillingAddressTwo(String bill_address_two){
+    public CheckoutPage enterBillingAddressTwo(String bill_address_two) {
         WebElement eleBillAddressTwo = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_address_2));
         eleBillAddressTwo.click();
         eleBillAddressTwo.clear();
@@ -161,7 +169,7 @@ public class CheckoutPage extends BasePage {
     }
 
 
-    public CheckoutPage enterBillingCity(String bill_city){
+    public CheckoutPage enterBillingCity(String bill_city) {
         WebElement eleBillingCity = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_city));
         eleBillingCity.click();
         eleBillingCity.clear();
@@ -169,12 +177,12 @@ public class CheckoutPage extends BasePage {
         return this;
     }
 
-    public CheckoutPage enterBillingState(String bill_state){
+    public CheckoutPage enterBillingState(String bill_state) {
         selectState(bill_state);
         return this;
     }
 
-    public CheckoutPage enterPostalCode(String postal_code){
+    public CheckoutPage enterPostalCode(String postal_code) {
         WebElement eleBillingPostcode = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_postcode));
         eleBillingPostcode.clear();
         eleBillingPostcode.sendKeys(postal_code);
@@ -182,27 +190,27 @@ public class CheckoutPage extends BasePage {
     }
 
 
-    public CheckoutPage enterBillingPhoneNo(String bill_ph_no){
+    public CheckoutPage enterBillingPhoneNo(String bill_ph_no) {
         WebElement eleBillingPhoneNo = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_phone));
         eleBillingPhoneNo.clear();
         eleBillingPhoneNo.sendKeys(bill_ph_no);
         return this;
     }
 
-    public CheckoutPage enterBillingEmailId(String bill_email_id){
+    public CheckoutPage enterBillingEmailId(String bill_email_id) {
         WebElement eleBillingEmailId = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_email));
         eleBillingEmailId.clear();
         eleBillingEmailId.sendKeys(bill_email_id);
         return this;
     }
 
-    public CheckoutPage clickLoginLinkFromCheckout(){
-       wait.until(ExpectedConditions.elementToBeClickable(loginLinkFromCheckout)).click();
-       return this;
+    public CheckoutPage clickLoginLinkFromCheckout() {
+        wait.until(ExpectedConditions.elementToBeClickable(loginLinkFromCheckout)).click();
+        return this;
     }
 
 
-    public CheckoutPage enterUsername(String username){
+    public CheckoutPage enterUsername(String username) {
         WebElement eleUsername = wait.until(ExpectedConditions.visibilityOfElementLocated(usernameFromCheckout));
         eleUsername.clear();
         eleUsername.sendKeys(username);
@@ -210,29 +218,27 @@ public class CheckoutPage extends BasePage {
     }
 
 
-    public CheckoutPage enterPassword(String password){
-        WebElement elePassword= wait.until(ExpectedConditions.visibilityOfElementLocated(passwordFromCheckout));
+    public CheckoutPage enterPassword(String password) {
+        WebElement elePassword = wait.until(ExpectedConditions.visibilityOfElementLocated(passwordFromCheckout));
         elePassword.clear();
         elePassword.sendKeys(password);
         return this;
     }
 
-    public CheckoutPage clickLoginBtnFromCheckout(){
+    public CheckoutPage clickLoginBtnFromCheckout() {
         wait.until(ExpectedConditions.elementToBeClickable(loginBtnFromCheckout)).click();
         return this;
     }
 
-    public CheckoutPage setBillingEmailIDOnLogin(LoginCredentials loginCredentials){
+    public CheckoutPage setBillingEmailIDOnLogin(LoginCredentials loginCredentials) {
         enterBillingEmailId(loginCredentials.getEmail_id());
         return this;
     }
 
-    public CheckoutPage setBillingEmailIDOnLogin(){
+    public CheckoutPage setBillingEmailIDOnLogin() {
         enterBillingEmailId(ConfigLoaders.getInstance().getEmailId());
         return this;
     }
-
-
 
 
     public CheckoutPage setBillingAddressFields(BillingAddress billingAddress) throws InterruptedException {
@@ -241,35 +247,35 @@ public class CheckoutPage extends BasePage {
         enterBillingCompany(billingAddress.getCompanyName());
 
 //          driver.findElement(billing_country).sendKeys(countryName);
-        enterBillingCountry(billingAddress.getCountryName());
+        //     enterBillingCountry(billingAddress.getCountryName());
 //        Thread.sleep(3000);
         enterBillingAddressOne(billingAddress.getStreetAddressOne());
         enterBillingAddressTwo(billingAddress.getStreetAddressTwo());
         enterBillingCity(billingAddress.getCity());
-        enterBillingState(billingAddress.getState());
+//        enterBillingState(billingAddress.getState());
 //        Thread.sleep(3000);
-        enterPostalCode(billingAddress.getZipCode());
+//        enterPostalCode(billingAddress.getZipCode());
         enterBillingPhoneNo(billingAddress.getPhone_no());
         enterBillingEmailId(billingAddress.getEmail_id());
         return this;
     }
 
-    public CheckoutPage selectDirectBankTransfer(){
+    public CheckoutPage selectDirectBankTransfer() {
         WebElement e = wait.until(ExpectedConditions.elementToBeClickable(directBankTransferRadioBtn));
-        if(!e.isSelected()){
+        if (!e.isSelected()) {
             e.click();
         }
         return this;
     }
 
-    public CheckoutPage clickPlaceOrderBtn(){
+    public CheckoutPage clickPlaceOrderBtn() {
         waitForOverlaysToDisappear(overlays);
         driver.findElement(placeOrderBtn).click();
         return this;
     }
 
-    public String getNotice(){
-        return  wait.until(ExpectedConditions.visibilityOfElementLocated(successNotice)).getText();
+    public String getNotice() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(successNotice)).getText();
     }
 
     public CheckoutPage loginFromCheckoutPage(LoginCredentials loginCredentials) throws InterruptedException {
@@ -288,8 +294,8 @@ public class CheckoutPage extends BasePage {
         return this;
     }
 
-    public String getTextCheckoutOrderReviewProductName(){
-        return  wait.until(ExpectedConditions.visibilityOfElementLocated(checkoutOrderReviewProductName)).getText();
+    public String getTextCheckoutOrderReviewProductName() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(checkoutOrderReviewProductName)).getText();
     }
 
 
