@@ -49,11 +49,23 @@ public class CheckoutPage extends BasePage {
         super(driver);
     }
 
+    // getter
+    public By getAlternateStateDropDown() {
+        return alternateStateDropDown;
+    }
+
+    public By getBillingStateTextBox() {
+        return billingStateTextBox;
+    }
+
+
 
     public CheckoutPage load() {
         load("/checkout/");
         return this;
     }
+
+
 
     public CheckoutPage selectCountry(String countryName) {
 /*        Select select = new Select(driver.findElement(countryDropDown));
@@ -181,6 +193,15 @@ public class CheckoutPage extends BasePage {
         selectState(bill_state);
         return this;
     }
+
+    public CheckoutPage enterTextBillingState(String bill_state) {
+        WebElement eleBillingState = wait.until(ExpectedConditions.visibilityOfElementLocated(billingStateTextBox));
+        eleBillingState.click();
+        eleBillingState.clear();
+        eleBillingState.sendKeys(bill_state);
+        return this;
+    }
+
 
     public CheckoutPage enterPostalCode(String postal_code) {
         WebElement eleBillingPostcode = wait.until(ExpectedConditions.visibilityOfElementLocated(billing_postcode));

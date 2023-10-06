@@ -16,7 +16,7 @@ public class AppDataProviders {
         return JacksonUtils.deserializeJson(productsJsonFilePath, Products[].class);
     }
 
-    @DataProvider(name = "getCountryNames")
+    @DataProvider(name = "getCountryNames",parallel = true)
     public BillingCountries[] getCountryNames() throws IOException {
         String countryNameJsonFilePath = "./json_files/checkout_page_billing_country.json";
         return JacksonUtils.deserializeJson(countryNameJsonFilePath, BillingCountries[].class);
