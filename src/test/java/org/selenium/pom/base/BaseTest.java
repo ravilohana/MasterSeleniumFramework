@@ -26,7 +26,7 @@ import java.util.List;
 
 public class BaseTest {
 
-    protected ThreadLocal<DriverManagerAbstract> driverManager = new ThreadLocal<>();
+    private final ThreadLocal<DriverManagerAbstract> driverManager = new ThreadLocal<>();
 
     private void setDriverManager(DriverManagerAbstract driverManager){
         this.driverManager.set(driverManager);
