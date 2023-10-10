@@ -1,29 +1,49 @@
 package org.selenium.pom.pages;
 
+import com.github.javafaker.App;
 import objects.Products;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.selenium.pom.base.BasePage;
+import org.selenium.pom.pages.components.AppHeader;
+import org.selenium.pom.pages.components.ProductThumbnail;
 
 import java.io.IOException;
 
 public class HomePage extends BasePage {
 
 
-    private final By storeMenuLink = By.cssSelector("#primary-site-navigation > div  > ul > li:nth-child(2)  > a");
+    private AppHeader appHeader;
+    private ProductThumbnail productThumbnail;
 
-    private final By viewCartLink = By.cssSelector("a[title='View cart']");
 
+    // Getter and setter
+
+
+    public AppHeader getAppHeader() {
+        return appHeader;
+    }
+
+    public void setAppHeader(AppHeader appHeader) {
+        this.appHeader = appHeader;
+    }
+
+    public ProductThumbnail getProductThumbnail() {
+        return productThumbnail;
+    }
+
+    public void setProductThumbnail(ProductThumbnail productThumbnail) {
+        this.productThumbnail = productThumbnail;
+    }
 
     public HomePage(WebDriver driver) {
         super(driver);
+        appHeader = new AppHeader(driver);
+        productThumbnail = new ProductThumbnail(driver);
     }
 
-    public StorePage clickStoreMenuLink(){
-        driver.findElement(storeMenuLink).click();
-        return new StorePage(driver);
-    }
+
 
     public HomePage load(){
         load("/");
@@ -35,17 +55,5 @@ public class HomePage extends BasePage {
         return new ProductPage(driver);
     }
 
-    private By getAddToCartEle(String productName){
-        return By.cssSelector("div.astra-shop-summary-wrap > a[aria-label='Add “"+productName+"” to your cart']");
-    }
-    public HomePage clickAddToCartBtn(String productName){
-        By addToCartBtn = getAddToCartEle(productName);
-        wait.until(ExpectedConditions.elementToBeClickable(addToCartBtn)).click();
-        return this;
-    }
 
-    public CartPage clickViewCart(){
-        wait.until(ExpectedConditions.elementToBeClickable(viewCartLink)).click();
-        return new CartPage(driver);
-    }
 }

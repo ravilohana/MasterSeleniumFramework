@@ -67,7 +67,7 @@ public class MyFirstTestCase extends BaseTest {
         Products products = new Products(1215);
 
         StorePage storePage = new HomePage(getDriver())
-                .load().clickStoreMenuLink()
+                .load().getAppHeader().clickStoreMenuLink()
                 .search(searchFor);
 
 
@@ -79,8 +79,8 @@ public class MyFirstTestCase extends BaseTest {
 //                .enterTextSearchFld("Blue")
 //                .clickSearchBtn();
         Assert.assertEquals(storePage.getTitle(), "Search results: “ "+ searchFor+ " ”");
-        storePage.clickAddToCartBtn(products.getName());
-        CartPage cartPage = storePage.clickViewCart();
+        storePage.getProductThumbnail().clickAddToCartBtn(products.getName());
+        CartPage cartPage = storePage.getProductThumbnail().clickViewCart();
         Assert.assertEquals(cartPage.getProductName(), products.getName());
         CheckoutPage checkoutPage = cartPage.clickCheckoutBtn()
                 .setBillingAddressFields(billingAddress)
@@ -101,7 +101,7 @@ public class MyFirstTestCase extends BaseTest {
 //        LoginCredentials loginCredentials = JacksonUtils.deserializeJson("./json_files/login_credentials.json"
 //                ,LoginCredentials.class);
         StorePage storePage = new HomePage(getDriver())
-                .load().clickStoreMenuLink()
+                .load().getAppHeader().clickStoreMenuLink()
                 .search("Blue");
 
 //        Thread.sleep(4000);
@@ -115,8 +115,8 @@ public class MyFirstTestCase extends BaseTest {
 //                .enterTextSearchFld("Blue")
 //                .clickSearchBtn();
         Assert.assertEquals(storePage.getTitle(), "Search results: “Blue”");
-        storePage.clickAddToCartBtn(products.getName());
-        CartPage cartPage = storePage.clickViewCart();
+        storePage.getProductThumbnail().clickAddToCartBtn(products.getName());
+        CartPage cartPage = storePage.getProductThumbnail().clickViewCart();
         Assert.assertEquals(cartPage.getProductName(), products.getName());
 
 

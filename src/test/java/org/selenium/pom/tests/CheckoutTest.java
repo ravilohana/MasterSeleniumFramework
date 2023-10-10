@@ -35,7 +35,7 @@ public class CheckoutTest extends BaseTest {
                 .clickPlaceOrderBtn();
 
 
-        Assert.assertEquals(checkoutPage.getNotice(), "Thank you. Your order has been received.");
+        Assert.assertEquals(checkoutPage.getNotice(), "Thank you. Your order has been received 12345.");
     }
 
 

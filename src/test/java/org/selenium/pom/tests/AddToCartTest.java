@@ -21,9 +21,9 @@ public class AddToCartTest extends BaseTest {
 
     @Test
     public void addToCartFromStorePage() throws IOException {
-        Products products = new Products(1215);
+        Products products = new Products(121511);
         CartPage cartPage = new StorePage(getDriver())
-                .load()
+                .load().getProductThumbnail()
                 .clickAddToCartBtn(products.getName())
                 .clickViewCart();
         Assert.assertEquals(cartPage.getProductName(), products.getName());
@@ -37,7 +37,7 @@ public class AddToCartTest extends BaseTest {
 //        System.out.println("---------" + storePage.getStorePageProductNameList());
         if (storePage.getStorePageProductNameList().contains(products.getName())){
             CartPage cartPage = new StorePage(getDriver())
-                    .load()
+                    .load().getProductThumbnail()
                     .clickAddToCartBtn(products.getName())
                     .clickViewCart();
             Assert.assertEquals(cartPage.getProductName(), products.getName());
@@ -48,6 +48,7 @@ public class AddToCartTest extends BaseTest {
     public void addToCartOnlyFeaturedProducts(Products products){
         if (products.isFeatured()){
             CartPage cartPage = new HomePage(getDriver()).load()
+                    .getProductThumbnail()
                     .clickAddToCartBtn(products.getName())
                     .clickViewCart();
             Assert.assertEquals(cartPage.getProductName(), products.getName());

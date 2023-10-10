@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.selenium.pom.base.BasePage;
+import org.selenium.pom.pages.components.ProductThumbnail;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class StorePage extends BasePage {
     private final By viewCartLink = By.cssSelector("a[title='View cart']");
 
     private final By infoTxt = By.cssSelector(".woocommerce-info");
+
+    private ProductThumbnail productThumbnail;
 
 //    private final  By storePageProductName = By.className(".astra-shop-summary-wrap > a > h2");
 
@@ -34,6 +37,14 @@ public class StorePage extends BasePage {
 
     public StorePage(WebDriver driver) {
         super(driver);
+        productThumbnail = new ProductThumbnail(driver);
+    }
+
+    // getter
+
+
+    public ProductThumbnail getProductThumbnail() {
+        return productThumbnail;
     }
 
     public StorePage load() {
@@ -60,19 +71,7 @@ public class StorePage extends BasePage {
         return  wait.until(ExpectedConditions.visibilityOfElementLocated(title)).getText();
     }
 
-    private By getAddToCartEle(String productName){
-        return By.cssSelector("div.astra-shop-summary-wrap > a[aria-label='Add “"+productName+"” to your cart']");
-    }
-    public StorePage clickAddToCartBtn(String productName){
-        By addToCartBtn = getAddToCartEle(productName);
-        wait.until(ExpectedConditions.elementToBeClickable(addToCartBtn)).click();
-        return this;
-    }
 
-    public CartPage clickViewCart(){
-        wait.until(ExpectedConditions.elementToBeClickable(viewCartLink)).click();
-        return new CartPage(driver);
-    }
     public ProductPage navigateToTheProduct(Integer id) throws IOException {
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h2[normalize-space()='"+ new Products(id).getName() + "']"))).click();
         return new ProductPage(driver);

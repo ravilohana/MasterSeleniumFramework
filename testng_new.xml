@@ -5,9 +5,9 @@
         <parameter name="browser" value="CHROME"/>
         <classes>
 <!--            <class name="org.selenium.pom.tests.LoginTest">-->
-            <class name="org.selenium.pom.tests.CheckoutTest">
+            <class name="org.selenium.pom.tests.AddToCartTest">
                 <methods>
-                    <include name="LoginAndCheckoutUsingDirectBankTransferDiffCountries"/>
+                    <include name="addToCartFromStorePage"/>
                 </methods>
             </class>
         </classes>

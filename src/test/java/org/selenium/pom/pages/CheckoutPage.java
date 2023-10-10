@@ -267,15 +267,15 @@ public class CheckoutPage extends BasePage {
         enterLastName(billingAddress.getLastname());
         enterBillingCompany(billingAddress.getCompanyName());
 
-//          driver.findElement(billing_country).sendKeys(countryName);
-        //     enterBillingCountry(billingAddress.getCountryName());
-//        Thread.sleep(3000);
+//      driver.findElement(billing_country).sendKeys(countryName);
+        enterBillingCountry(billingAddress.getCountryName());
+//       Thread.sleep(3000);
         enterBillingAddressOne(billingAddress.getStreetAddressOne());
         enterBillingAddressTwo(billingAddress.getStreetAddressTwo());
         enterBillingCity(billingAddress.getCity());
-//        enterBillingState(billingAddress.getState());
-//        Thread.sleep(3000);
-//        enterPostalCode(billingAddress.getZipCode());
+        enterBillingState(billingAddress.getState());
+//      Thread.sleep(3000);
+        enterPostalCode(billingAddress.getZipCode());
         enterBillingPhoneNo(billingAddress.getPhone_no());
         enterBillingEmailId(billingAddress.getEmail_id());
         return this;
