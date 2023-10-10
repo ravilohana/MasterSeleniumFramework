@@ -6,6 +6,7 @@ import org.selenium.pom.base.BaseTest;
 import org.selenium.pom.pages.CheckoutPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.ConfigLoaders;
 import utils.FakerUtils;
 import webAPI.actions.CartAPI;
 import webAPI.actions.SignUpAPI;
@@ -17,8 +18,8 @@ public class LoginTest extends BaseTest {
     @Test
     public void loginDuringCheckout() throws IOException, InterruptedException {
         String username = "demouser" + new FakerUtils().generateRandomNumber();
-        String email_id = "demouser"+ new FakerUtils().generateRandomNumber()+"@gmail.com";
-        String password = "demouser"+ new FakerUtils().generateRandomNumber();
+        String email_id = "demouser" + new FakerUtils().generateRandomNumber() + "@gmail.com";
+        String password = "demouser" + new FakerUtils().generateRandomNumber();
         LoginCredentials userRegister = new LoginCredentials()
                 .setUsername(username)
                 .setEmail_id(email_id)
@@ -27,7 +28,7 @@ public class LoginTest extends BaseTest {
         signUpAPI.register(userRegister);
 
         CartAPI cartAPI = new CartAPI();
-        Products  products = new Products(1215);
+        Products products = new Products(1215);
         cartAPI.addToCartAPI(products.getId(), 1);
 
 
@@ -40,8 +41,7 @@ public class LoginTest extends BaseTest {
 //        Thread.sleep(5000);
         Assert.assertTrue(checkoutPage.getTextCheckoutOrderReviewProductName().contains(products.getName()));
 
-
-
-
     }
+
+
 }

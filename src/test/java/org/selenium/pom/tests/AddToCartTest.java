@@ -91,8 +91,8 @@ public class AddToCartTest extends BaseTest {
 
 
 
-        softAssert.assertEquals(cartTotalPriceWithCoupon,(cartTotalPriceWithoutCoupon - cartShipPrice),"BUG: Calculation is not done proper.");
-        softAssert.assertAll();
+        Assert.assertEquals(cartTotalPriceWithCoupon,(cartTotalPriceWithoutCoupon - cartShipPrice));
+
 
     }
 
@@ -151,7 +151,45 @@ public class AddToCartTest extends BaseTest {
         // 25 % if total price
 
 
-        Assert.assertEquals(cartTotalPriceWithCouponOff25,(cartTotalPriceWithoutCoupon - couponOff25));
+        softAssert.assertEquals(cartTotalPriceWithCouponOff25,(cartTotalPriceWithoutCoupon - couponOff25),"BUG: Calculation is not done proper.");
+        softAssert.assertAll();
+    }
+
+
+    @Test(dataProvider = "getFeaturedProducts", dataProviderClass = AppDataProviders.class)
+    public void addToCartMultipleProductsFromStorePageFreeShipping(Products products) throws IOException {
+        // Products products = new Products();
+//        System.out.println("--------" + products.getName());
+        StorePage storePage = new StorePage(getDriver()).load();
+//        System.out.println("---------" + storePage.getStorePageProductNameList());
+        if (storePage.getStorePageProductNameList().contains(products.getName())){
+            CartPage cartPage = new StorePage(getDriver())
+                    .load().getProductThumbnail()
+                    .clickAddToCartBtn(products.getName())
+                    .clickViewCart();
+            Assert.assertEquals(cartPage.getProductName(), products.getName());
+            float cartTotalPriceWithoutCoupon = cartPage.convertStrToFloat(cartPage.getCartTotalPrice());
+            float cartCAStateTaxPrice = cartPage.convertStrToFloat(cartPage.getCartCAStateTaxPrice());
+            System.out.println("CA State Tax: " + cartCAStateTaxPrice);
+            System.out.println("Total Price Before Applying Coupon Code: " + cartTotalPriceWithoutCoupon);
+            cartPage
+                    .enterCouponCode("freeship")
+                    .clickApplyCouponBtn();
+
+            Assert.assertTrue(cartPage.isFreeShippingEnable());
+
+            float cartShipPrice = cartPage.convertStrToFloat(cartPage.getCartShippingPrice());
+            float cartTotalPriceWithCoupon = cartPage.convertStrToFloat(cartPage.getCartTotalPrice());
+
+            System.out.println("Shipping Price: " + cartShipPrice);
+            System.out.println("Total Price After applying Coupon Code : " + cartTotalPriceWithCoupon);
+
+
+
+            Assert.assertEquals(cartTotalPriceWithCoupon,(cartTotalPriceWithoutCoupon - cartShipPrice));
+        }
+
+
 
     }
 

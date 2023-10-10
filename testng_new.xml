@@ -5,9 +5,15 @@
         <parameter name="browser" value="CHROME"/>
         <classes>
 <!--            <class name="org.selenium.pom.tests.LoginTest">-->
-            <class name="org.selenium.pom.tests.AddToCartTest">
+            <class name="org.selenium.pom.tests.AccountTest">
                 <methods>
-                    <include name="validateCouponCodeOff25"/>
+                    <include name="viewExistingOrders"/>
+<!--                    <include name="validateCouponCodeOffCart5"/>-->
+<!--                    <include name="validateFreeShippingCouponCode"/>-->
+<!--                    <include name="addToCartFromStorePage"/>-->
+<!--                    <include name="addToCartMultipleProductsFromStorePageFreeShipping"/>-->
+
+
                 </methods>
             </class>
         </classes>
