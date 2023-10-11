@@ -4,18 +4,8 @@
     <test verbose="6" name="Test">
         <parameter name="browser" value="CHROME"/>
         <classes>
-<!--            <class name="org.selenium.pom.tests.LoginTest">-->
-            <class name="org.selenium.pom.tests.AccountTest">
-                <methods>
-                    <include name="viewExistingOrders"/>
-<!--                    <include name="validateCouponCodeOffCart5"/>-->
-<!--                    <include name="validateFreeShippingCouponCode"/>-->
-<!--                    <include name="addToCartFromStorePage"/>-->
-<!--                    <include name="addToCartMultipleProductsFromStorePageFreeShipping"/>-->
-
-
-                </methods>
-            </class>
+            <class name="org.selenium.pom.tests.NavigationTest"/>
+            <class name="org.selenium.pom.tests.SearchTest"/>
         </classes>
     </test>
 

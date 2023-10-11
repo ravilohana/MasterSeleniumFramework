@@ -14,6 +14,7 @@ target/
 *.ipr
 src/test/java/LambdaDragDrop.java
 src/test/java/StorePageProducts.java
+allure-results/
 screenshots/
 testng_all_browser.xml
 testng_chrome.xml
