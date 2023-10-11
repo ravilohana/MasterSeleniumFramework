@@ -123,10 +123,8 @@
                         <parallel>methods</parallel>
                         <threadCount>6</threadCount>
                         <suiteXmlFiles>
-                            <suiteXmlFile>testng_new_parallel.xml</suiteXmlFile>
+                            <suiteXmlFile>testng.xml</suiteXmlFile>
                         </suiteXmlFiles>
-                        <parallel>methods</parallel>
-                        <threadCount>4</threadCount>
                     </configuration>
                 </plugin>
 <!--            allure framework plugin-->
@@ -137,9 +135,9 @@
                 <configuration>
                     <argLine> -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>testng_jenkins.xml</suiteXmlFile>
-                    </suiteXmlFiles>
+<!--                    <suiteXmlFiles>-->
+<!--                        <suiteXmlFile>testng_jenkins.xml</suiteXmlFile>-->
+<!--                    </suiteXmlFiles>-->
                 </configuration>
 
                 <dependencies>

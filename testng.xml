@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite" parallel="tests" thread-count="2">
-    <test verbose="6" name="My First Test Case - FIREFOX " parallel="methods" thread-count="2">
-        <parameter name="browser" value="FIREFOX"/>
-        <classes>
-            <class name="org.selenium.pom.tests.MyFirstTestCase">
-<!--                <methods>-->
-<!--                    <include name="guestCheckoutUsingDirectBankTransfer"/>-->
-<!--                    <include name="loginUserFromCheckoutUsingDirectBankTransfer"/>-->
-<!--                </methods>-->
-            </class>
-        </classes>
-    </test>
-    <test verbose="6" name="My First Test Case - CHROME" parallel="methods" thread-count="2" >
+    <test verbose="6" name="Test">
         <parameter name="browser" value="CHROME"/>
         <classes>
-            <class name="org.selenium.pom.tests.MyFirstTestCase">
-<!--                <methods>-->
-<!--                    <include name="guestCheckoutUsingDirectBankTransfer"/>-->
-<!--                   <include name="loginUserFromCheckoutUsingDirectBankTransfer"/>-->
-<!--                </methods>-->
-            </class>
+            <class name="org.selenium.pom.tests.NavigationTest"/>
+            <class name="org.selenium.pom.tests.SearchTest"/>
         </classes>
     </test>
 
