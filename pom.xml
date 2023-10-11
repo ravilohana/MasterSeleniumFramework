@@ -122,11 +122,11 @@
                     <configuration>
                         <parallel>methods</parallel>
                         <threadCount>6</threadCount>
-<!--                        <suiteXmlFiles>-->
-<!--                            <suiteXmlFile>testng.xml</suiteXmlFile>-->
-<!--                        </suiteXmlFiles>-->
-<!--                        <parallel>methods</parallel>-->
-<!--                        <threadCount>4</threadCount>-->
+                        <suiteXmlFiles>
+                            <suiteXmlFile>testng_new_parallel.xml</suiteXmlFile>
+                        </suiteXmlFiles>
+                        <parallel>methods</parallel>
+                        <threadCount>4</threadCount>
                     </configuration>
                 </plugin>
 <!--            allure framework plugin-->
